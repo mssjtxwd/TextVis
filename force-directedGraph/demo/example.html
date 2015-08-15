@@ -1,0 +1,70 @@
+
+<html>
+  <head>
+
+    <title>Force Directed Graphing in Javascript</title>
+
+    <script src="event.js"></script>
+    <script src="timer.js"></script>
+    <script src="graph.js"></script>
+    <script src="domui.js"></script>
+    <script src="control.js"></script>
+
+    <style type="text/css">
+      @import 'style.css';
+    </style>
+
+  </head>
+  <body onload="timer.start()">
+
+
+    <!-- frame -->
+	<div id="div:svg1" >
+	<svg id="svg1" width="1000" height="600"></svg>
+	</div>
+    <script language="Javascript">
+
+    var timer = new TimerControl();
+    timer.initialize( 1 );
+
+	//alert(document.getElementById("div:"+"svg1").offsetLeft.toString());
+    var graphui=new GraphUI();
+    graphui.initialize( document.getElementById("svg1"), 
+						null,
+                        false,
+                        true
+    );
+	//alert("1");
+	
+    // instantiate the graph
+    var graph=new Graph();
+    graph.initialize( document.getElementById("svg1"));
+	//alert("2");
+	
+    // set a UI for the graph to report to
+    graph.setUI( graphui );
+	
+    // subscribe the graph to the control timer
+    timer.subscribe( graph );
+	//alert("3");
+	
+    var control = new UserControl();
+    control.initialize( timer, graph, graphui );
+	
+	
+	var node1 = control.addNode( null, 6, true, 50 );
+	var node2 = control.addNode(null,6,true,50);
+	var node3 = control.addNode(null,6,true,50);
+	var node4 = control.addNode(null,6,true,50);
+	var node5 = control.addNode(null,6,true,50);
+	control.addEdge( node1, node2, 10 );
+    control.addEdge( node2, node3, 10);
+    control.addEdge( node2, node4, 10);
+	control.addEdge( node3, node5, 50);
+	
+	
+    </script>
+
+  </body>
+
+</html>
